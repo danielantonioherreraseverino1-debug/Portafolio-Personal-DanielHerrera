@@ -24,7 +24,7 @@ body {
     color: var(--text-primary);
     font-family: var(--font-main);
     line-height: 1.6;
-    overflow-x: hidden; /* Evita desplazamiento horizontal no deseado */
+    overflow-x: hidden;
 }
 
 /* =========================================================
@@ -124,7 +124,7 @@ body {
     margin-bottom: 2rem;
 }
 
-/* Botones */
+/* Botones Hero */
 .hero-buttons {
     display: flex;
     gap: 1rem;
@@ -166,6 +166,20 @@ body {
 }
 
 /* Redes Sociales */
+.social-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.social-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 .social-icons {
     display: flex;
     gap: 1rem;
@@ -282,7 +296,7 @@ section {
 .info-item p {
     font-size: 0.98rem;
     font-weight: 500;
-    word-break: break-word; /* Soluciona el desbordamiento de correos largos */
+    word-break: break-word;
 }
 
 /* =========================================================
@@ -384,7 +398,7 @@ section {
     font-weight: 500;
     transition: all 0.2s ease;
     max-width: 100%;
-    word-break: break-all; /* Mantiene la dirección dentro de la caja en pantallas chicas */
+    word-break: break-all;
 }
 
 .contact-email i {
@@ -439,6 +453,10 @@ footer {
 
     .hero-buttons {
         justify-content: center;
+    }
+
+    .social-container {
+        align-items: center;
     }
 
     .social-icons {
