@@ -8,7 +8,7 @@
     --accent-hover: #0284c7;       /* Azul interacción */
     --text-primary: #f8fafc;       /* Blanco cálido */
     --text-secondary: #94a3b8;     /* Gris texto secundario */
-    --border-color: #334155;       /* Bordes sutiles sin neón */
+    --border-color: #334155;       /* Bordes sutiles */
     --font-main: 'Poppins', system-ui, -apple-system, sans-serif;
 }
 
@@ -24,6 +24,7 @@ body {
     color: var(--text-primary);
     font-family: var(--font-main);
     line-height: 1.6;
+    overflow-x: hidden; /* Evita desplazamiento horizontal no deseado */
 }
 
 /* =========================================================
@@ -34,7 +35,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1.25rem 8%;
-    background-color: rgba(15, 23, 42, 0.9);
+    background-color: rgba(15, 23, 42, 0.95);
     position: fixed;
     top: 0;
     width: 100%;
@@ -48,15 +49,22 @@ body {
     font-weight: 600;
     color: var(--text-primary);
     letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .navbar a {
     color: var(--text-secondary);
     text-decoration: none;
-    margin-left: 2rem;
     font-size: 0.9rem;
     font-weight: 500;
     transition: color 0.2s ease;
+    white-space: nowrap;
 }
 
 .navbar a:hover,
@@ -73,7 +81,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 4rem;
+    gap: 3rem;
 }
 
 .hero-content {
@@ -93,7 +101,7 @@ body {
 }
 
 .hero-content h1 {
-    font-size: 2.8rem;
+    font-size: clamp(2rem, 5vw, 2.8rem);
     line-height: 1.2;
     margin-bottom: 1rem;
     font-weight: 600;
@@ -121,6 +129,7 @@ body {
     display: flex;
     gap: 1rem;
     margin-bottom: 2.5rem;
+    flex-wrap: wrap;
 }
 
 .btn {
@@ -131,6 +140,7 @@ body {
     text-decoration: none;
     transition: all 0.2s ease;
     cursor: pointer;
+    text-align: center;
 }
 
 .btn-primary {
@@ -181,16 +191,19 @@ body {
     border-color: var(--accent-color);
 }
 
-/* MARCO DE FOTO PERSONAL CON COLOR */
+/* MARCO DE FOTO PERSONAL */
 .hero-image-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
 .image-frame {
-    width: 310px;
-    height: 420px;
+    width: 100%;
+    max-width: 310px;
+    height: auto;
+    aspect-ratio: 3 / 4;
     border: 2px solid var(--accent-color);
     border-radius: 12px;
     padding: 10px;
@@ -219,7 +232,7 @@ section {
 }
 
 .section-title {
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
     text-align: center;
     margin-bottom: 3rem;
     font-weight: 600;
@@ -243,19 +256,21 @@ section {
 
 .info-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 2rem;
 }
 
 .info-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
 }
 
 .info-item i {
     font-size: 1.5rem;
     color: var(--accent-color);
+    margin-top: 0.2rem;
+    flex-shrink: 0;
 }
 
 .info-item h3 {
@@ -267,6 +282,7 @@ section {
 .info-item p {
     font-size: 0.98rem;
     font-weight: 500;
+    word-break: break-word; /* Soluciona el desbordamiento de correos largos */
 }
 
 /* =========================================================
@@ -343,13 +359,16 @@ section {
 
 .contact-box {
     margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
 }
 
 .contact-email {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.75rem;
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1.25rem;
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 6px;
@@ -358,10 +377,13 @@ section {
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s ease;
+    max-width: 100%;
+    word-break: break-all; /* Mantiene la dirección dentro de la caja en pantallas chicas */
 }
 
 .contact-email i {
     color: var(--accent-color);
+    flex-shrink: 0;
 }
 
 .contact-email:hover {
@@ -371,7 +393,7 @@ section {
 
 footer {
     text-align: center;
-    padding: 2rem;
+    padding: 2rem 1rem;
     background-color: #0b1120;
     color: var(--text-secondary);
     font-size: 0.85rem;
@@ -379,17 +401,34 @@ footer {
 }
 
 /* =========================================================
-   DISEÑO RESPONSIVO (MÓVILES)
+   DISEÑO RESPONSIVO (MÓVILES Y TABLETS)
    ========================================================= */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        padding: 1rem 5%;
+        gap: 0.75rem;
+    }
+
+    .navbar {
+        gap: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .navbar a {
+        font-size: 0.85rem;
+    }
+
     .hero-section {
         flex-direction: column-reverse;
         text-align: center;
-        padding-top: 7rem;
+        padding: 9rem 5% 3rem;
+        gap: 2.5rem;
     }
 
-    .hero-content h1 {
-        font-size: 2.2rem;
+    .hero-content {
+        max-width: 100%;
     }
 
     .hero-buttons {
@@ -401,22 +440,19 @@ footer {
     }
 
     .image-frame {
-        width: 250px;
-        height: 340px;
+        max-width: 260px;
     }
 
-    .navbar {
-        display: flex;
-        gap: 1rem;
+    .about-card {
+        padding: 1.5rem;
     }
 
-    .navbar a {
-        margin-left: 0;
-        font-size: 0.85rem;
+    section {
+        padding: 4rem 5%;
     }
 
     .contact-email {
         font-size: 0.85rem;
-        padding: 0.65rem 1rem;
+        padding: 0.75rem 1rem;
     }
 }
